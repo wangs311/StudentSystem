@@ -70,5 +70,13 @@ public class StudentServiceTest {
     public void checkLoginTest() throws Exception {
         System.out.println(studentService.checkLogin(2015012007, "2015012007").getStuName());
     }
+    
+    
+    @Test
+    public void queryAllGoToHail() {
+        System.out.println("go to hail");
+    }
+    
+    
 
 }
