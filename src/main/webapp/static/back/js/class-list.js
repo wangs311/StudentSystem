@@ -47,7 +47,7 @@ $(function () {
         var name = $("#new-class").val();
         $.ajax({
             type: "POST", //请求方式
-            url: "/StuSystem/backClass/new", //删除课程的地址
+            url: "/StuSystem/backClass/new", //提交课程的地址
             data: {
                 grade:grade,
                 class:name
