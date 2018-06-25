@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../static/back/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/back/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="../static/back/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../static/back/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../static/back/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../static/back/css/style.css" />
+
+    <title>查询课程</title>
+
+</head>
+
+<body>
+    <!--_header 作为公共模版分离出去-->
+    <header class="navbar-wrapper">
+        <div class="navbar navbar-fixed-top">
+            <div class="container-fluid cl">
+                <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/StuSystem/elective/toElective">学生成绩查询选课系统</a>
+                <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+                    <ul class="cl">
+                        <li class="dropDown dropDown_hover">
+                            <a href="#" class="dropDown_A" id="name">
+                            </a>
+                            <ul class="dropDown-menu menu radius box-shadow">
+                                <li>
+                                    <a href="/StuSystem/student/toPerson">修改信息</a>
+                                </li>
+
+                                <li>
+                                    <a href="/StuSystem/student/logout">退出</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!--/_header 作为公共模版分离出去-->
+
+    <!--_menu 作为公共模版分离出去-->
+    <aside class="Hui-aside">
+
+		<div class="menu_dropdown bk_2">
+			<dl id="course">
+				<dt>
+					<a href="/StuSystem/elective/toElective">
+						<i class="Hui-iconfont">&#xe616;</i> 我要选课
+					</a>
+				</dt>
+			</dl>
+			<dl id="student">
+				<dt>
+					<a href="/StuSystem/elective/toCourseScore">
+						<i class="Hui-iconfont">&#xe61d;</i> 查询已选课程及成绩
+					</a>
+				</dt>
+			</dl>
+		</div>
+    </aside>
+    <div class="dislpayArrow hidden-xs">
+        <a class="pngfix" href="javascript:void(0);" onclick="displaynavbar(this)"></a>
+    </div>
+    <!--/_menu 作为公共模版分离出去-->
+
+    <section class="Hui-article-box">
+        <nav class="breadcrumb">
+            <i class="Hui-iconfont"></i>
+            <a href="/StuSystem/elective/toElective" class="maincolor">首页</a>
+            <span class="c-999 en">&gt;</span>
+            <a href="/StuSystem/elective/toElective" class="maincolor">我要选课</a>
+        </nav>
+        <div class="Hui-article">
+            <article class="cl pd-20">
+                <table class="table table-border table-bordered table-striped">
+                    <thead class="text-c">
+                        <tr>
+                            <th>课程名称</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-c">
+                    </tbody>
+                </table>
+
+            </article>
+        </div>
+    </section>
+
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../static/back/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/back/js/layer.js"></script>
+    <script type="text/javascript" src="../static/back/js/H-ui.js"></script>
+    <script type="text/javascript" src="../static/back/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../static/back/js/H-ui.admin.page.js"></script>
+    <!--/_footer /作为公共模版分离出去-->
+    <script type="text/javascript" src="../static/back/js/course-list-student.js"></script>
+</body>
+
+</html>

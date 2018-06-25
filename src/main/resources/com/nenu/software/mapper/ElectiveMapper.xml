@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nenu.software.mapper.ElectiveMapper">
+
+    <insert id="newElective" parameterType="com.nenu.software.common.entity.Elective">
+        INSERT INTO t_elective(stu_id, course_id, score)
+        VALUES (#{elective.stuId}, #{elective.courseId}, #{elective.score})
+    </insert>
+
+    <delete id="deleteElectiveByConditions">
+        DELETE FROM t_elective
+        <where>
+            <if test="id != null and id > 0">
+                id = #{id}
+            </if>
+            <if test="stuId != null and stuId > 0">
+                AND stu_id = #{stuId}
+            </if>
+            <if test="courseId != null and courseId > 0">
+                AND course_id = #{courseId}
+            </if>
+        </where>
+    </delete>
+
+    <update id="updateElective" parameterType="com.nenu.software.common.entity.Elective">
+        UPDATE t_elective
+        SET stu_id = #{elective.stuId}, course_id = #{elective.courseId}, score = #{elective.score}
+        WHERE id = #{elective.id}
+    </update>
+
+    <select id="selectElectiveById" resultType="com.nenu.software.common.entity.Elective">
+        SELECT id, stu_id AS stuId, course_id AS courseId, score
+        FROM t_elective
+        WHERE id = #{id}
+    </select>
+
+    <select id="listElectiveByConditions" resultType="com.nenu.software.common.entity.Elective">
+        SELECT id, stu_id AS stuId, course_id AS courseId, score
+        FROM t_elective
+        <where>
+            <if test="stuId != null and stuId > 0">
+                stu_id = #{stuId}
+            </if>
+            <if test="courseId != null and courseId > 0">
+                AND course_id = #{courseId}
+            </if>
+        </where>
+    </select>
+
+    <select id="listElectiveStudents" resultType="com.nenu.software.common.dto.StuScore">
+        SELECT
+          te.id AS eleId,
+          ts.id AS stuId,
+          ts.stu_num AS stuNum,
+          te.course_id AS courseId,
+          t_course.course_name AS course,
+          ts.stu_name AS stuName,
+          (SELECT class_name  FROM t_class tc WHERE tc.id = ts.class_id) AS className,
+          (SELECT grade  FROM t_class tc WHERE tc.id = ts.class_id) AS grade,
+          te.score
+        FROM t_elective te
+        RIGHT JOIN t_student ts ON te.stu_id = ts.id
+        RIGHT JOIN t_course  ON te.course_id = t_course.id
+        WHERE
+          te.course_id = #{courseId}
+    </select>
+
+    <select id="listElectedCourses" resultType="com.nenu.software.common.entity.Course">
+        SELECT
+          id,
+          course_name AS courseName,
+        FROM t_course tc
+        WHERE tc.id NOT IN (
+          SELECT tc.id
+          FROM t_course
+          LEFT JOIN t_elective te
+          WHERE te.stu_id = #{stuId}
+        )
+    </select>
+
+    <select id="listUnelectedCourses" resultType="com.nenu.software.common.entity.Course">
+SELECT
+id,
+t_course.course_name AS courseName
+FROM
+t_course
+WHERE
+t_course.id NOT IN (SELECT
+t_elective.course_id
+FROM
+t_elective
+WHERE
+t_elective.stu_id = #{stuId})
+    </select>
+
+
+    <select id="queryCourseAndScore" resultType="com.nenu.software.common.dto.ElectiveDto">
+        SELECT
+            t_elective.score,
+            t_elective.course_id AS courseId,
+            t_elective.stu_id AS stuId,
+            t_elective.id,
+            t_student.stu_name AS stuName,
+            t_course.course_name AS courseName
+        FROM
+        t_elective
+        INNER JOIN t_student ON t_elective.stu_id = t_student.id
+        INNER JOIN t_course ON t_elective.course_id = t_course.id
+        WHERE
+        t_student.id = #{stuId}
+    </select>
+
+
+
+</mapper>

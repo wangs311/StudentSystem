@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nenu.software.mapper.CourseMapper">
+    <insert id="newCourse" parameterType="com.nenu.software.common.entity.Course">
+        INSERT INTO t_course(course_name)
+        VALUES (#{course.courseName})
+    </insert>
+
+    <delete id="deleteCourseById" parameterType="Integer">
+        DELETE FROM t_course
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateCourse" parameterType="com.nenu.software.common.entity.Course">
+        UPDATE t_course
+        SET course_name = #{course.courseName}
+        WHERE id = #{course.id}
+    </update>
+
+    <select id="selectCourseById" resultType="com.nenu.software.common.entity.Course">
+        SELECT id, course_name AS courseName
+        FROM t_course WHERE id = #{id}
+    </select>
+
+    <select id="listCourseByName" resultType="com.nenu.software.common.entity.Course">
+        SELECT id, course_name AS courseName
+        FROM t_course
+        <if test="courseName != null and courseName.length() != 0">
+            WHERE course_name = #{courseName}
+        </if>
+    </select>
+
+    <select id="queryAllCourse" resultType="com.nenu.software.common.entity.Course">
+        SELECT
+            t_course.id,
+            t_course.course_name AS courseName
+        FROM t_course
+    </select>
+
+</mapper>

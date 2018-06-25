@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* 你自己的样式 */
+table {
+    margin-top: 10px;
+}
+#myModal {
+    position: absolute;
+    top: 20%;;
+}
+
+#require-div {
+    margin-bottom: 20px;
+}
+
+#submit-add,.add {
+    margin-left: 8px;
+}
+
+.add {
+    margin-top: 20px;
+}

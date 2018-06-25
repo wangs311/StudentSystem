@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nenu.software.mapper.ClassMapper">
+
+    <insert id="newClass" parameterType="com.nenu.software.common.entity.Class">
+        INSERT INTO t_class(grade, class_name)
+        VALUES (#{clazz.grade}, #{clazz.className})
+    </insert>
+
+    <delete id="deleteClassById" parameterType="Integer">
+        DELETE FROM t_class
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateClass" parameterType="com.nenu.software.common.entity.Class">
+        UPDATE t_class
+        SET grade = #{clazz.grade}, class_name = #{clazz.className}
+        WHERE id = #{clazz.id}
+    </update>
+
+    <select id="selectClassById" resultType="com.nenu.software.common.entity.Class">
+        SELECT id, grade, class_name AS className
+        FROM t_class
+        WHERE id = #{id}
+    </select>
+
+    <select id="listClassByConditions" resultType="com.nenu.software.common.entity.Class">
+        SELECT id, grade, class_name AS className
+        FROM t_class
+        <where>
+            <if test="grade != null and grade.length() != 0">
+                grade = #{grade}
+            </if>
+            <if test="className != null and className.length() != 0">
+                class_name = #{className}
+            </if>
+        </where>
+    </select>
+
+</mapper>

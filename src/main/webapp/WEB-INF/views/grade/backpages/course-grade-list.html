@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../static/back/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/back/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="../static/back/css/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../static/back/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../static/back/css/style.css" />
+
+    <title>查询成绩</title>
+
+</head>
+
+<body>
+    <!--_header 作为公共模版分离出去-->
+    <header class="navbar-wrapper">
+        <div class="navbar navbar-fixed-top">
+            <div class="container-fluid cl">
+                <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/StuSystem/backTeacher/toIndex">学生成绩管理系统</a>
+                <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+                    <ul class="cl">
+                        <li class="dropDown dropDown_hover">
+                            <a href="#" class="dropDown_A" id="name">
+                            </a>
+                            <ul class="dropDown-menu menu radius box-shadow">
+                                <li>
+                                    <a href="/StuSystem/backTeacher/toChangePassword">修改密码</a>
+                                </li>
+
+                                <li>
+                                    <a href="login.html">退出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!--/_header 作为公共模版分离出去-->
+
+    <!--_menu 作为公共模版分离出去-->
+    <aside class="Hui-aside">
+
+        <div class="menu_dropdown bk_2">
+            <dl id="course">
+                <dt>
+                    <a href="/StuSystem/backCourse/list">
+                        <i class="Hui-iconfont">&#xe616;</i> 课程管理
+                    </a>
+                </dt>
+            </dl>
+            <dl id="class">
+				<dt>
+					<a href="/StuSystem/backClass/list">
+						<i class="Hui-iconfont">&#xe61d;</i> 班级管理
+					</a>
+				</dt>
+			</dl>
+            <dl id="student">
+                <dt>
+                    <a href="/StuSystem/back/student/toStudentList">
+                        <i class="Hui-iconfont">&#xe61d;</i> 学生管理
+                    </a>
+                </dt>
+            </dl>
+        </div>
+    </aside>
+    <div class="dislpayArrow hidden-xs">
+        <a class="pngfix" href="javascript:void(0);" onclick="displaynavbar(this)"></a>
+    </div>
+    <!--/_menu 作为公共模版分离出去-->
+
+    <section class="Hui-article-box">
+        <nav class="breadcrumb">
+            <i class="Hui-iconfont"></i>
+            <a href="/StuSystem/backTeacher/toIndex" class="maincolor">首页</a>
+            <span class="c-999 en">&gt;</span>
+            <a href="grade-list.html" class="maincolor">课程-成绩管理</a>
+        </nav>
+        <div class="Hui-article">
+            <article class="cl pd-20">
+                <!--<div id="require-div" class="row cl">-->
+                    <!--<div class="col-xs-12 col-sm-3">-->
+                        <!--<input type="text" id="student-id" class="input-text size-S" placeholder="学生学号">-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-12 col-sm-2">-->
+                        <!--<input type="text" id="student-name" class="input-text size-S" placeholder="学生姓名">-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-12 col-sm-2">-->
+                        <!--<input type="text" id="student-class" class="input-text size-S" placeholder="学生班级">-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-12 col-sm-3">-->
+                        <!--<input type="text" id="student-course" class="input-text size-S" placeholder="课程">-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-12 col-sm-2">-->
+                        <!--<button class="btn btn-primary radius" id="require">查询</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <table class="table table-border table-bordered table-striped">
+                    <thead class="text-c">
+                        <tr>
+                            <th>学号</th>
+                            <th>班级</th>
+                            <th>学生姓名</th>
+                            <th>课程</th>
+                            <th>分数</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-c">
+
+                    </tbody>
+                </table>
+                最高分：
+                <ul id="high">
+                    <li></li>
+                </ul>
+                最低分：
+                <ul id="low">
+                    <li></li>
+                </ul>
+                <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+                    <!--<div class="modal-dialog">-->
+                        <!--<div class="modal-content">-->
+                            <!--<div class="modal-header">-->
+                                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                                <!--<h4 class="modal-title" id="myModalLabel">修改学生信息</h4>-->
+                            <!--</div>-->
+                            <!--<div class="modal-body">-->
+                                <!--请输入学生姓名:-->
+                                <!--<input type="text" class="input-text student-name">-->
+                                <!--<br /> 请输入学生班级:-->
+                                <!--<input type="text" class="input-text student-class">-->
+                                <!--<br />-->
+                            <!--</div>-->
+                            <!--<div class="modal-footer">-->
+                                <!--<button type="button" class="btn btn-primary submit">提交更改</button>-->
+                                <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+                <!--</div>-->
+            </article>
+        </div>
+    </section>
+
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../static/back/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/back/js/H-ui.js"></script>
+    <script type="text/javascript" src="../static/back/js/layer.js"></script>
+    <script type="text/javascript" src="../static/back/js/H-ui.admin.page.js"></script>
+    <!--/_footer /作为公共模版分离出去-->
+    <script type="text/javascript" src="../static/back/js/course-grade-list.js"></script>
+</body>
+
+</html>

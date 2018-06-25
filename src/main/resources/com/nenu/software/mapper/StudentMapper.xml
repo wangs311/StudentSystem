@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nenu.software.mapper.StudentMapper">
+
+    <insert id="newStudent" parameterType="com.nenu.software.common.entity.Student">
+        INSERT INTO t_student(stu_name, stu_num, password, birthday, class_id)
+        VALUES(#{student.stuName},#{student.stuNum},#{student.stuNum},#{student.birthday},#{student.classId})
+    </insert>
+
+    <delete id="deleteStudentById" parameterType="Integer">
+        DELETE FROM t_student
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteStudentByStuNum">
+        DELETE FROM t_student
+        WHERE stu_num = #{stuNum}
+    </delete>
+
+    <update id="updateStudent" parameterType="com.nenu.software.common.entity.Student">
+        UPDATE t_student
+        SET
+          password = #{student.password}, birthday = #{student.birthday}, stu_name = #{student.stuName}, class_id = #{student.classId}
+        WHERE id = #{student.id}
+    </update>
+
+    <select id="selectStudentById" resultType="com.nenu.software.common.entity.Student">
+        SELECT id,
+                stu_name AS stuName,
+                stu_num AS stuNum,
+                password,
+                birthday,
+                class_id AS classId
+        FROM t_student
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectStudentByStuNum" resultType="com.nenu.software.common.entity.Student">
+        SELECT id,
+                stu_name AS stuName,
+                stu_num AS stuNum,
+                password,
+                birthday,
+                class_id AS classId
+        FROM t_student
+        WHERE stu_num = #{stuNum}
+    </select>
+
+    <select id="listStudentByConditions" resultType="com.nenu.software.common.entity.Student">
+        SELECT id,
+                stu_name AS stuName,
+                stu_num AS stuNum,
+                password,
+                birthday,
+                class_id AS classId
+        FROM t_student
+        <include refid="listConditions" />
+        ORDER BY stu_num ASC
+    </select>
+
+    <sql id="listConditions">
+        <where>
+            <if test="stuName != null and stuName.length() != 0">
+                AND stu_name LIKE CONCAT('%', #{stuName}, '%')
+            </if>
+            <if test="stuNum != null and stuNum > 0">
+                AND stu_num = #{stuNum}
+            </if>
+            <if test="classId != null and classId > 0">
+                AND class_id = #{classId}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="checkLogin" resultType="com.nenu.software.common.entity.Student">
+        SELECT
+            id,
+            stu_name AS stuName,
+            stu_num AS stuNum,
+            password,
+            birthday,
+            class_id AS classId
+        FROM t_student
+        WHERE stu_num = #{stuNum} AND password = #{password}
+    </select>
+
+    <select id="query" resultType="com.nenu.software.common.dto.StuScore">
+        SELECT
+          ts.id AS stuId,
+          ts.stu_name AS stuNum,
+          tc.id AS courseId,
+          tc.course_name AS course,
+          ts.stu_name AS stuName,
+          (SELECT grade FROM t_class WHERE ts.class_id = t_class.id) AS grade,
+          (SELECT class_name FROM t_class WHERE ts.class_id = t_class.id) AS className,
+          (SELECT score FROM t_elective WHERE t_elective.stu_id = ts.id AND t_elective.course_id = tc.id) AS score,
+        FROM t_student ts
+        LEFT JOIN t_elective ON ts.id = t_elective.stu_id
+        LEFT JOIN t_course tc ON t_elective.course_id = tc.id
+    </select>
+
+</mapper>
