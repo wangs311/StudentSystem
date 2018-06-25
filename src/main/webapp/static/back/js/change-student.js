@@ -20,7 +20,6 @@ $().ready(function () {
             id = data.id;
         }
     });
-
     $("#submit").click(function () {
         if($("#newpassword").val()){
             password = $("#newpassword").val();
